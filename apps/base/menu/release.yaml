@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: menu
+  namespace: menu
+spec:
+  releaseName: menu
+  chart:
+    spec:
+      chart: menu
+      sourceRef:
+        kind: HelmRepository
+        name: menu
+        namespace: flux-system
+      version: "1.0"
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    cache: redis-master.redis:6379
+    image:
+      tag: "1.0"
+    ingress:
+      enabled: true
+    podAnnotations:
+      dapr.io/enabled: "true"
+      dapr.io/app-id: "menu"
+      dapr.io/app-port: "80"
