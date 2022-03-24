@@ -7,7 +7,7 @@ spec:
   releaseName: users-service
   chart:
     spec:
-      chart: restaurant-app/charts/users-service
+      chart: restaurant-app
       sourceRef:
         kind: HelmRepository
         name: restaurant-app

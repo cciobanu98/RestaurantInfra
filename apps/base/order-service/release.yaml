@@ -7,7 +7,7 @@ spec:
   releaseName: order-service
   chart:
     spec:
-      chart: restaurant-app/charts/order-service
+      chart: restaurant-app
       sourceRef:
         kind: HelmRepository
         name: restaurant-app
@@ -18,6 +18,10 @@ spec:
     remediation:
       retries: 3
   values:
+    menu-service:
+      enabled: false
+    users-service:
+      enabled: false
     cache: redis-master.redis:6379
     image:
       tag: "main"
