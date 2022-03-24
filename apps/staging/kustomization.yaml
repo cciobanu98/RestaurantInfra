@@ -9,4 +9,4 @@ resources:
 patchesStrategicMerge:
   - menu-service-values.yaml
   - order-service-values.yaml
-  - users-service-valies.yaml
+  - users-service-values.yaml
