@@ -3,10 +3,4 @@ kind: Kustomization
 namespace: restaurant-app
 resources:
   - ../base/infrastructure
-  - ../base/menu-service
-  - ../base/order-service
-  - ../base/users-service
-patchesStrategicMerge:
-  - menu-service-values.yaml
-  - order-service-values.yaml
-  - users-service-values.yaml
+  - ../base/services

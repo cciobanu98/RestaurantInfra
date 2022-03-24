@@ -1,0 +1,41 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: services
+  namespace: restaurant-app
+spec:
+  releaseName: services
+  chart:
+    spec:
+      chart: restaurant-app
+      sourceRef:
+        kind: HelmRepository
+        name: restaurant-app
+        namespace: flux-system
+      version: "1.0"
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    menu-service:
+      image:
+        tag: "main"
+      podAnnotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "menu-service"
+        dapr.io/app-port: "80"
+    users-service:
+      image:
+        tag: "main"
+      podAnnotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "users-service"
+        dapr.io/app-port: "80"
+    order-service:
+      image:
+        tag: "main"
+      podAnnotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "order-service"
+        dapr.io/app-port: "80"
