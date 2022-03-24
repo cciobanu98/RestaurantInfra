@@ -1,16 +1,16 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: menu
-  namespace: menu
+  name: menu-service
+  namespace: restaurant-app
 spec:
-  releaseName: menu
+  releaseName: menu-service
   chart:
     spec:
-      chart: menu
+      chart: restaurant-app/charts/menu-service
       sourceRef:
         kind: HelmRepository
-        name: menu
+        name: restaurant-app
         namespace: flux-system
       version: "1.0"
   interval: 5m
@@ -25,5 +25,5 @@ spec:
       enabled: true
     podAnnotations:
       dapr.io/enabled: "true"
-      dapr.io/app-id: "menu"
+      dapr.io/app-id: "menu-service"
       dapr.io/app-port: "80"

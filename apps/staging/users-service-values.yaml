@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: users-service
+  namespace: restaurant-app
+spec:
+  chart:
+    spec:
+      version: ">=0.0.5"
+  test:
+    enable: false
+  values:
+    ingress:
+      hosts:
+        - host: users-service.staging
+          paths:
+            - path: /
+              pathType: ImplementationSpecific

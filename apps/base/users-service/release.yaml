@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: users-service
+  namespace: restaurant-app
+spec:
+  releaseName: users-service
+  chart:
+    spec:
+      chart: restaurant-app/charts/users-service
+      sourceRef:
+        kind: HelmRepository
+        name: restaurant-app
+        namespace: flux-system
+      version: "1.0"
+  interval: 5m
+  install:
+    remediation:
+      retries: 3
+  values:
+    cache: redis-master.redis:6379
+    image:
+      tag: "main"
+    ingress:
+      enabled: true
+    podAnnotations:
+      dapr.io/enabled: "true"
+      dapr.io/app-id: "users-service"
+      dapr.io/app-port: "80"
